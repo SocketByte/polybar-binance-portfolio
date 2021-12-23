@@ -25,6 +25,18 @@ interval = 600
 ```
 Please remember to give your script execution permissions.
 
+## Dependencies
+This script requires `jq`, `curl`, `bc`, `grep`, `sed` and `openssl` to be installed and working correctly.
+
+### Arch Linux
+```
+sudo pacman -S jq curl bc openssl
+```
+You can also optionally install Font Awesome 5 to use the icons shown in previews.
+```
+sudo pacman -S ttf-font-awesome
+```
+
 ## Default Configuration
 The configuration options are located in the script directly.
 ```bash
@@ -68,19 +80,6 @@ COINSTATS_USE=No # Set to Yes to enable.
 COINSTATS_PORTFOLIO_URL="" 
 ```
 
-## Dependencies
-This script requires `jq`, `curl`, `bc`, `grep`, `sed` and `openssl` to be installed and working correctly.
-
-### Arch Linux
-```
-sudo pacman -S jq curl bc openssl
-```
-You can also optionally install Font Awesome 5 to use the icons shown in previews.
-```
-sudo pacman -S ttf-font-awesome
-```
-
-
 ## Requirements
 Since this script uses a few different APIs to do it's job, you'll have to generate your own API keys.
 
@@ -113,10 +112,10 @@ You can then copy and paste your key in the script:
 CURRCONV_API_KEY="your key"
 ```
 
-### CoinStats Shareable Portfolio URL
+### CoinStats Shareable Portfolio URL (optional)
 You can opt-in to use the heavily experimental feature of the script to get in-depth profit/loss data from CoinStats.
 
-Since CoinStats does not expose any API for PNL calculation, I had to look for another way. Thankfully, CoinStats allows it's users to create a "shareable portfolio link" that can be used to track your current portfolio balance (with detailed PNL information) publicly. (So by extension this script, too).
+Since CoinStats does not expose any API for PNL calculation, I had to look for another way. Thankfully, CoinStats allows it's users to create a "shareable portfolio link" that can be used to track your current portfolio balance (with detailed PNL information) publicly.
 
 To create such a link, go into your [CoinStats Portfolio](https://coinstats.app/portfolio/) and select a small "link" icon at the bottom of the page.
 
