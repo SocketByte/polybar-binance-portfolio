@@ -58,10 +58,14 @@ COINSTATS_PORTFOLIO_URL=""
 #
 # ... The script begins here ...
 #
-TIMESTAMP=$(date +%s%N | cut -b1-13)
-SIGNATURE=$(echo -n "timestamp=${TIMESTAMP}" | openssl dgst -sha256 -hmac $SECRET_KEY)
-TRIMMED_SIGNATURE=$(echo $SIGNATURE | cut -d " " -f2)
-SPOT_BALANCE_LIST=$(curl -s -H "X-MBX-APIKEY: ${API_KEY}" -X GET "https://api.binance.com/api/v3/account?timestamp=${TIMESTAMP}&signature=${TRIMMED_SIGNATURE}")
+TIMESTAMP=$(date +%s%3N)
+RECV_WINDOW=30000
+
+RAW_SIGNATURE=$(echo -n "recvWindow=${RECV_WINDOW}&timestamp=${TIMESTAMP}" | openssl dgst -sha256 -hmac $SECRET_KEY)
+SIGNATURE=$(echo $RAW_SIGNATURE | cut -d " " -f2)
+
+SPOT_REQUEST="https://api.binance.com/api/v3/account?recvWindow=${RECV_WINDOW}&timestamp=${TIMESTAMP}&signature=${SIGNATURE}"
+SPOT_BALANCE_LIST=$(curl -s -H "X-MBX-APIKEY: ${API_KEY}" -X GET $SPOT_REQUEST)
 
 if [ "$FIAT_CURRENCY" != "USD" ]; then
     FIAT_CONV_RATE=$(curl -s "https://free.currconv.com/api/v7/convert?q=USD_${FIAT_CURRENCY}&compact=ultra&apiKey=${CURRCONV_API_KEY}" | jq -r ".USD_${FIAT_CURRENCY}")
