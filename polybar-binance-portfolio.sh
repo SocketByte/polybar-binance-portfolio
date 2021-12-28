@@ -100,8 +100,8 @@ if [ "$COINSTATS_USE" = "Yes" ]; then
     CS_PNL_DAILY=$(echo $QUERY_JSON | jq -r "${QUERY_PREFIX}.portfolio_profit_24.USD")
 
     if [ "$FIAT_CURRENCY" != "USD" ]; then
-        CS_PNL=$(echo "scale=2; $CS_PNL * $FIAT_CONV_RATE / 1" | bc)
-        CS_PNL_DAILY=$(echo "scale=2; $CS_PNL_DAILY * $FIAT_CONV_RATE / 1" | bc)
+        CS_PNL=$(echo "scale=2; $CS_PNL * $FIAT_CONV_RATE" | bc)
+        CS_PNL_DAILY=$(echo "scale=2; $CS_PNL_DAILY * $FIAT_CONV_RATE" | bc)
     fi
 
     CS_USD_PRICE=$(echo "scale=2; $CS_USD_PRICE / 1" | bc)
