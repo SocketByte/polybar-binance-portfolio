@@ -105,8 +105,10 @@ if [ "$COINSTATS_USE" = "Yes" ]; then
     fi
 
     CS_USD_PRICE=$(echo "scale=2; $CS_USD_PRICE / 1" | bc)
+    CS_PNL=$(echo "scale=2; $CS_PNL / 1" | bc)
+    CS_PNL_DAILY=$(echo "scale=2; $CS_PNL_DAILY / 1" | bc)
     CS_PNL_PERCENT=$(echo "scale=2; $CS_PNL_PERCENT / 1" | bc)
-    CS_PNL_DAILY_PERCENT=$(echo "scale=2; $CS_PNL_DAILY_PERCENT / 1" | bc)
+    CS_PNL_DAILY_PERCENT=$(echo "scale=2; $CS_PNL_DAILY_PERCENT / 1" | bc) 
 
     if (( $(echo "$CS_PNL_PERCENT > 0" | bc -l) )); then
         CS_PNL_ICON=$ICON_UP
