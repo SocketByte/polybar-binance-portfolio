@@ -72,6 +72,7 @@ if [ "$FIAT_CURRENCY" != "USD" ]; then
 fi
 
 ASSETS=$(echo $SPOT_BALANCE_LIST | jq -r '.balances[] | select((.free|tonumber) > 0) | "\(.asset):\(.free)\n"')
+TOTAL_VALUE=0
 for ASSET in $ASSETS; do
     ASSET_NAME=$(echo $ASSET | cut -d ":" -f1)
     ASSET_QUANTITY=$(echo $ASSET | cut -d ":" -f2)
